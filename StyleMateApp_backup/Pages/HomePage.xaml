@@ -1,0 +1,38 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StyleMate1._1.Pages.HomePage"
+             BackgroundColor="#1a1a2e">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="25"
+                             VerticalOptions="CenterAndExpand">
+
+            <Label Text="StyleMate"
+                   FontSize="42"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#ffffff"
+                   Margin="0,20,0,0" />
+
+            <Label Text="O teu guarda-roupa inteligente"
+                   FontSize="18"
+                   TextColor="#9ca3af"
+                   HorizontalOptions="Center" />
+
+            <VerticalStackLayout Spacing="18" Margin="0,40,0,0">
+                <Button Text="Adicionar Roupa"
+                        Clicked="AdicionarRoupa_Clicked"
+                        Style="{StaticResource GradientButton}" />
+
+                <Button Text="Ver Guarda-Roupa"
+                        Clicked="VerGuardaRoupa_Clicked"
+                        Style="{StaticResource GradientButton}" />
+
+                <Button Text="Sugestão de Outfit"
+                        Clicked="SugestaoOutfit_Clicked"
+                        Style="{StaticResource GradientButton}" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
