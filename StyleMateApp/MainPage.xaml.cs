@@ -1,28 +1,35 @@
+using StyleMateApp.Pages;
 
-/*namespace StyleMateApp
+namespace StyleMateApp
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
 
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private async void AdicionarRoupa_Clicked(object sender, EventArgs e)
         {
-            count++;
+            await Navigation.PushAsync(new AddRoupaPage());
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+        private async void VerGuardaRoupa_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new GuardaRoupaPage());
+        }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        private async void SugestaoOutfit_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SugestaoOutfitPage());
+        }
+        private async void Login_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LoginPage());
         }
     }
 
 }
 
-*/
+
