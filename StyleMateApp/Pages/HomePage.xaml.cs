@@ -30,3 +30,4 @@ public partial class HomePage : ContentPage
         await Navigation.PushAsync(new SugestaoOutfitPage());
     }
 }
+

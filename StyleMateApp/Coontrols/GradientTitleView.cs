@@ -1,4 +1,4 @@
-﻿namespace StyleMateApp.Coontrols
+namespace StyleMateApp.Coontrols
 {
     public class GradientTitleView : ContentView
     {
@@ -32,3 +32,4 @@
         }
     }
 }
+

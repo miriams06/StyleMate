@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace StyleMateApp.Models
 {
@@ -17,3 +17,4 @@ namespace StyleMateApp.Models
         public ICollection<ConjuntoRoupa>? ConjuntosRoupas { get; set; }
     }
 }
+

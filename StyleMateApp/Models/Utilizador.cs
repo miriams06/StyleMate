@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -25,3 +25,4 @@ namespace StyleMateApp.Models
         public ICollection<Mala> Malas { get; set; }
     }
 }
+

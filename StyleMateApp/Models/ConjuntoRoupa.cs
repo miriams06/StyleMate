@@ -1,4 +1,4 @@
-﻿namespace StyleMateApp.Models
+namespace StyleMateApp.Models
 {
     public class ConjuntoRoupa
     {

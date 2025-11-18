@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-<<<<<<< HEAD
+
 using StyleMateAPI.Models;
 using StyleMateAPI.Services;
 
-namespace StyleMateAPI.Controllers
-=======
+namespace StyleMateAPI.Controllers;
+
 using StyleMate1._1.Models;
 using StyleMate1._1.Services;
 
 namespace StyleMate1._1.Controllers
->>>>>>> 856aa784dc6d940e6820f47978450581557e3a84
+
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -80,7 +80,7 @@ namespace StyleMate1._1.Controllers
             await _service.DeleteAsync(id);
             return NoContent();
         }
-<<<<<<< HEAD
+
         [HttpPost("upload")]
         public async Task<IActionResult> UploadImage([FromForm] IFormFile file, [FromServices] AzureBlobService blobService)
         {

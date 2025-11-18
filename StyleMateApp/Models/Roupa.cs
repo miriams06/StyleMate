@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -27,3 +27,4 @@ namespace StyleMateApp.Models
         public Utilizador Utilizador { get; set; }
     }
 }
+
