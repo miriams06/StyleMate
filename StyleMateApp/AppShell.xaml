@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:pages="clr-namespace:StyleMateApp.Pages"
-       x:Class="StyleMateApp.AppShell">
+<Shell
+    x:Class="StyleMateApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:StyleMateApp.Pages">
 
-    <!-- podes adicionar mais tabs/rotas aqui -->
-    <ShellItem Title="Main">
-        <ShellSection>
-            <ShellContent Title="Home" ContentTemplate="{DataTemplate pages:HomePage}" />
-        </ShellSection>
-    </ShellItem>
+    <TabBar>
+
+        <ShellContent
+            Title="Adicionar Roupa"
+            Icon="add.png"
+            ContentTemplate="{DataTemplate pages:AddRoupaPage}" />
+
+        <ShellContent
+            Title="Guarda-Roupa"
+            Icon="closet.png"
+            ContentTemplate="{DataTemplate pages:GuardaRoupaPage}" />
+
+        <ShellContent
+            Title="Sugestão"
+            Icon="suggest.png"
+            ContentTemplate="{DataTemplate pages:SugestaoOutfitPage}" />
+
+    </TabBar>
 
 </Shell>
-
