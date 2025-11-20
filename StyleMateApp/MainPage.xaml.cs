@@ -10,7 +10,7 @@ namespace StyleMateApp
             InitializeComponent();
         }
 
-        private async void AdicionarRoupa_Clicked(object sender, EventArgs e)
+        /*private async void AdicionarRoupa_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AddRoupaPage());
         }
@@ -23,7 +23,7 @@ namespace StyleMateApp
         private async void SugestaoOutfit_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SugestaoOutfitPage());
-        }
+        }*/
         private async void Login_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new LoginPage());
