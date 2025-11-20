@@ -2,48 +2,54 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StyleMateApp.MainPage"
-			xmlns:controls="clr-namespace:StyleMateApp.Coontrols"
-			BackgroundColor="#1A1A2E">	
+			Title="StyleMate"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#1A1A2E">
 
-    <ScrollView>
-        <VerticalStackLayout Spacing="30" Padding="30" VerticalOptions="CenterAndExpand">
-            
-            <controls:GradientTitleView />
-            
-			<GraphicsView x:Name="GradientTitleView"
-			  HeightRequest="100"
-			  HorizontalOptions="Fill"
-			  VerticalOptions="Start" />
+    <ContentPage.Resources>
+        <LinearGradientBrush x:Key="ButtonGradient"
+                             StartPoint="0,0"
+                             EndPoint="1,0">
+            <GradientStop Color="#9A3B5D" Offset="0.0" />
+            <GradientStop Color="#F3547D" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Resources>
 
-			<Label Text="O teu guarda-roupa inteligente"
-			   FontSize="18"
-			   TextColor="#e4e6eb"
-			   HorizontalOptions="Center" />
+    <VerticalStackLayout Spacing="25"
+                         Padding="30"
+                         VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="FillAndExpand">
 
-			<!-- Botões -->
-			<VerticalStackLayout Spacing="20" Margin="0,40,0,0">
-
-				<Button Text="Adicionar Roupa"
-						Clicked="AdicionarRoupa_Clicked"
-						Style="{StaticResource GradientButton}" />
-
-				<Button Text="Ver Guarda-Roupa"
-						Clicked="VerGuardaRoupa_Clicked"
-						Style="{StaticResource GradientButton}" />
-
-				<Button Text="Sugestão de Outfit"
-						Clicked="SugestaoOutfit_Clicked"
-						Style="{StaticResource GradientButton}" />
-				<Button Text="Login"
-					Clicked="Login_Clicked" />
-
-			</VerticalStackLayout>
-
-</VerticalStackLayout>
-</ScrollView>
+        <Label Text="StyleMate"
+               FontSize="48"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="#E68DC7"/>
 
 
+        <Label Text="O teu guarda-roupa inteligente"
+               FontSize="18"
+               TextColor="#C0C0C0"
+               HorizontalOptions="Center"
+               Margin="0, -15, 0, 40"/>
 
+        <Button Text="Login"
+                Clicked="Login_Clicked"
+                CornerRadius="25"
+                HeightRequest="60"
+                WidthRequest="250"
+                HorizontalOptions="Center">
+
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#A23C8A" Offset="0.0"/>
+                    <GradientStop Color="#D24F75" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
+    </VerticalStackLayout>
+   
 
 </ContentPage>
 
