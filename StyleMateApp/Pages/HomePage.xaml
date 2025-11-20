@@ -1,0 +1,68 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StyleMateApp.Pages.HomePage"
+             BackgroundColor="#1E2230">
+
+    <VerticalStackLayout Padding="40" Spacing="25"
+                         VerticalOptions="Center">
+
+        <Label Text="StyleMate"
+               FontSize="36"
+               HorizontalOptions="Center"
+               TextColor="#ff6fb2"
+               FontAttributes="Bold"/>
+
+        <Label Text="O teu guarda-roupa inteligente"
+               HorizontalOptions="Center"
+               TextColor="#bfc7d4"
+               FontSize="16"/>
+
+        <!-- BOTÃO -->
+        <Frame CornerRadius="32" HasShadow="True" Padding="0">
+            <Frame.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#C445DD" Offset="0.0"/>
+                    <GradientStop Color="#EB4754" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Frame.Background>
+            <Button Text="Adicionar Roupa"
+                    Clicked="OnAddRoupaClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="White" FontSize="18"
+                    CornerRadius="32"
+                    HeightRequest="60"/>
+        </Frame>
+
+        <Frame CornerRadius="32" HasShadow="True" Padding="0">
+            <Frame.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#C445DD" Offset="0.0"/>
+                    <GradientStop Color="#EB4754" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Frame.Background>
+            <Button Text="Ver Guarda-Roupa"
+                    Clicked="OnGuardarRoupaClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="White" FontSize="18"
+                    CornerRadius="32"
+                    HeightRequest="60"/>
+        </Frame>
+
+        <Frame CornerRadius="32" HasShadow="True" Padding="0">
+            <Frame.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#C445DD" Offset="0.0"/>
+                    <GradientStop Color="#EB4754" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Frame.Background>
+            <Button Text="Sugestão de Outfit"
+                    Clicked="OnSugestaoClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="White" FontSize="18"
+                    CornerRadius="32"
+                    HeightRequest="60"/>
+        </Frame>
+
+    </VerticalStackLayout>
+
+</ContentPage>

@@ -1,18 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using StyleMate1._1.Services;
+using StyleMateAPI.Services;
+
 
 namespace StyleMate.API.Controllers
 {
     [ApiController]
     [Route("auth")]
-
     public class AuthController : ControllerBase
     {
         private readonly UtilizadorService _users;
@@ -21,10 +18,11 @@ namespace StyleMate.API.Controllers
         {
             _users = users;
         }
-        // -----------------------------
-        //  GERAR TOKEN JWT
-        // -----------------------------
-        private string GenerateJwtToken( string email)
+
+        // ============================================================
+        // GERAR JWT INTERNO (PARA O MAUI GUARDAR)
+        // ============================================================
+        private string GenerateJwtToken(string email)
         {
             var key = Environment.GetEnvironmentVariable("JWT_KEY");
             var issuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
@@ -35,7 +33,6 @@ namespace StyleMate.API.Controllers
 
             var claims = new[]
             {
-               
                 new Claim(ClaimTypes.Email, email)
             };
 
@@ -50,79 +47,37 @@ namespace StyleMate.API.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        // -----------------------------
-        //  LOGIN GOOGLE
-        // -----------------------------
-        [HttpGet("login-google")]
-        public IActionResult LoginGoogle()
+        // ============================================================
+        // LER CLAIMS (email + nome) DO ID_TOKEN (JWT)
+        // ============================================================
+        private (string email, string name) ExtractUserInfoFromIdToken(string idToken)
         {
-            var properties = new AuthenticationProperties
-            {
-                RedirectUri = Url.Action("GoogleCallback")
-            };
+            var handler = new JwtSecurityTokenHandler();
+            var jwt = handler.ReadJwtToken(idToken);
 
-            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+            var email = jwt.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+            var name = jwt.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
+
+            return (email, name);
         }
 
-        [HttpGet("google-callback")]
-        public async Task<IActionResult> GoogleCallback()
+        // ============================================================
+        // LOGIN MICROSOFT (MOBILE FLOW)
+        // ============================================================
+        [HttpPost("microsoft-mobile-login")]
+        public async Task<IActionResult> MicrosoftMobileLogin([FromBody] MobileAuthDto dto)
         {
-            var result = await HttpContext.AuthenticateAsync();
+            if (string.IsNullOrEmpty(dto.IdToken))
+                return BadRequest("ID Token em falta.");
 
-            if (!result.Succeeded)
-                return Unauthorized("Falha no login Google");
+            var (email, name) = ExtractUserInfoFromIdToken(dto.IdToken);
 
-            var email = result.Principal.FindFirst(ClaimTypes.Email)?.Value;
-            var name = result.Principal.Identity.Name;
-            var externalId = result.Principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (email == null)
+                return Unauthorized("ID Token inválido.");
 
-            // ⭐ GRAVA OU ATUALIZA NA BASE DE DADOS
             var user = await _users.CreateOrUpdateExternalAsync(
                 email: email,
-                externalId: externalId,
-                nome: name
-            );
-
-            var jwt = GenerateJwtToken(email);
-
-            return Ok(new
-            {
-                provider = "google",
-                email,
-                token = jwt
-            });
-        }
-
-        // -----------------------------
-        //  LOGIN MICROSOFT
-        // -----------------------------
-        [HttpGet("login-microsoft")]
-        public IActionResult LoginMicrosoft()
-        {
-            var props = new AuthenticationProperties
-            {
-                RedirectUri = Url.Action("MicrosoftCallback")
-            };
-
-            return Challenge(props, MicrosoftAccountDefaults.AuthenticationScheme);
-        }
-
-        [HttpGet("microsoft-callback")]
-        public async Task<IActionResult> MicrosoftCallback()
-        {
-            var result = await HttpContext.AuthenticateAsync();
-
-            if (!result.Succeeded)
-                return Unauthorized("Falha no login Microsoft");
-
-            var email = result.Principal.FindFirst(ClaimTypes.Email)?.Value;
-            var name = result.Principal.Identity.Name;
-            var externalId = result.Principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            // ⭐ GRAVA OU ATUALIZA NA BASE DE DADOS
-            var user = await _users.CreateOrUpdateExternalAsync(
-                email: email,
-                externalId: externalId,
+                externalId: dto.ExternalId,
                 nome: name
             );
 
@@ -135,5 +90,45 @@ namespace StyleMate.API.Controllers
                 token = jwt
             });
         }
+
+        // ============================================================
+        // LOGIN GOOGLE (MOBILE FLOW)
+        // ============================================================
+        [HttpPost("google-mobile-login")]
+        public async Task<IActionResult> GoogleMobileLogin([FromBody] MobileAuthDto dto)
+        {
+            if (string.IsNullOrEmpty(dto.IdToken))
+                return BadRequest("ID Token em falta.");
+
+            var (email, name) = ExtractUserInfoFromIdToken(dto.IdToken);
+
+            if (email == null)
+                return Unauthorized("ID Token inválido.");
+
+            var user = await _users.CreateOrUpdateExternalAsync(
+                email: email,
+                externalId: dto.ExternalId,
+                nome: name
+            );
+
+            var jwt = GenerateJwtToken(email);
+
+            return Ok(new
+            {
+                provider = "google",
+                email,
+                token = jwt
+            });
+        }
+    }
+
+    // ============================================================
+    // DTO QUE O MAUI ENVIA
+    // ============================================================
+    public class MobileAuthDto
+    {
+        public string IdToken { get; set; }
+        public string AccessToken { get; set; }
+        public string ExternalId { get; set; }
     }
 }

@@ -1,14 +1,9 @@
-<<<<<<< HEAD
+
 ﻿using StyleMateAPI.Models;
 using StyleMateAPI.Repositories;
 
 namespace StyleMateAPI.Services
-=======
-﻿using StyleMate1._1.Models;
-using StyleMate1._1.Repositories;
 
-namespace StyleMate1._1.Services
->>>>>>> 856aa784dc6d940e6820f47978450581557e3a84
 {
     public class UtilizadorService
     {
@@ -44,8 +39,7 @@ namespace StyleMate1._1.Services
             var entity = await _repo.GetByIdAsync(id);
             if (entity != null) await _repo.DeleteAsync(entity);
         }
-<<<<<<< HEAD
-=======
+
         public async Task<Utilizador> CreateOrUpdateExternalAsync(
             string email,
             string externalId,
@@ -77,6 +71,6 @@ namespace StyleMate1._1.Services
 
             return user;
         }
->>>>>>> 856aa784dc6d940e6820f47978450581557e3a84
+
     }
 }

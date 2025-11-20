@@ -3,11 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StyleMateApp.Pages.LoginPage"
              Title="LoginPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Padding="40" Spacing="20"
+                         VerticalOptions="Center">
+
+        <Label Text="Entrar"
+               TextColor="#ff6fb2"
+               FontSize="32"
+               HorizontalOptions="Center"/>
+
+        <Entry x:Name="EmailEntry"
+               Placeholder="Email"
+               TextColor="White"
+               PlaceholderColor="#bfc7d4"/>
+
+        <Entry x:Name="PasswordEntry"
+               Placeholder="Password"
+               IsPassword="True"
+               TextColor="White"
+               PlaceholderColor="#bfc7d4"/>
+
+        <Button Text="Login Local"
+                Clicked="OnLocalLogin"
+                Background="#EB4754"
+                TextColor="White"
+                CornerRadius="25"/>
+
+        <Label Text="Ou entrar com:"
+               HorizontalOptions="Center"
+               TextColor="White"/>
+
+        <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+            <Button Text="Microsoft"
+                    Clicked="OnMicrosoftLogin"
+                    Background="#5865F2"
+                    TextColor="White"
+                    CornerRadius="25"/>
+            <Button Text="Google"
+                    Clicked="OnGoogleLogin"
+                    Background="#DB4437"
+                    TextColor="White"
+                    CornerRadius="25"/>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
 
